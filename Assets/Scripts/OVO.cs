@@ -21,15 +21,25 @@ public class OVO : MonoBehaviour
             }
 
             // 偵測鍵盤按鍵是否持續按住
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKeyDown(KeyCode.W))
             {
-                Debug.Log("W 鍵被持續按住！");
+                Debug.Log("W 鍵被按下！");
             }
 
             // 偵測鍵盤按鍵是否釋放
-            if (Input.GetKeyUp(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.A))
             {
-                Debug.Log("A 鍵被釋放！");
+                Debug.Log("A 鍵被按下！");
+            }
+
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                Debug.Log("S 鍵被按下!");
+            }
+            
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                Debug.Log("D 鍵被按下!");
             }
         }   
     }
