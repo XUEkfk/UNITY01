@@ -4,43 +4,56 @@ using UnityEngine;
 
 public class OVO : MonoBehaviour
 {
+    public float moveSpeed = 5f; // 角色的移動速度
+    private Rigidbody2D rb; // 2D 物理剛體
+    private Vector2 movement; // 移動向量
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>(); // 獲取剛體組件
     }
 
     // Update is called once per frame
     void Update()
     {
+        // 初始化水平和垂直方向的移動值
+        float moveX = 0f;
+        float moveY = 0f;
+
+        // 偵測鍵盤按鍵是否持續按住
+        if (Input.GetKey(KeyCode.W))
         {
-            // 偵測鍵盤按鍵是否被按下
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                Debug.Log("空白鍵被按下！");
-            }
+            moveY = 1f; // 按住 W 鍵向上移動
+            Debug.Log("W GetKeyDowm");
+        }
 
-            // 偵測鍵盤按鍵是否持續按住
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                Debug.Log("W 鍵被按下！");
-            }
+        if (Input.GetKey(KeyCode.A))
+        {
+            moveX = -1f; // 按住 A 鍵向左移動
+            Debug.Log("A GetKeyDowm");
+        }
 
-            // 偵測鍵盤按鍵是否釋放
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                Debug.Log("A 鍵被按下！");
-            }
+        if (Input.GetKey(KeyCode.S))
+        {
+            moveY = -1f; // 按住 S 鍵向下移動
+            Debug.Log("S GetKeyDowm");
+        }
 
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                Debug.Log("S 鍵被按下!");
-            }
-            
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                Debug.Log("D 鍵被按下!");
-            }
-        }   
+        if (Input.GetKey(KeyCode.D))
+        {
+            moveX = 1f; // 按住 D 鍵向右移動
+            Debug.Log("D GetKeyDowm");
+        }
+
+        // 將水平和垂直方向的移動值存入移動向量
+        movement = new Vector2(moveX, moveY).normalized;
+    }
+
+    // 使用 FixedUpdate 來處理物理更新
+    void FixedUpdate()
+    {
+        // 移動角色
+        rb.velocity = movement * moveSpeed;
     }
 }
